@@ -6,9 +6,16 @@
 
 [English](#english) · [Español](#español)
 
+[![npm version](https://img.shields.io/npm/v/agency-toolkit.svg?color=cb3837&logo=npm)](https://www.npmjs.com/package/agency-toolkit)
+[![npm downloads](https://img.shields.io/npm/dm/agency-toolkit.svg?color=cb3837&logo=npm)](https://www.npmjs.com/package/agency-toolkit)
+[![GitHub release](https://img.shields.io/github/v/release/Hydrophoenix333/agency-toolkit?color=2060FF&logo=github)](https://github.com/Hydrophoenix333/agency-toolkit/releases)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
-[![Node](https://img.shields.io/badge/node-%3E%3D18.0.0-brightgreen)](https://nodejs.org)
-[![Claude Code](https://img.shields.io/badge/Claude_Code-Skill-orange)](https://claude.com/claude-code)
+[![Node](https://img.shields.io/badge/node-%3E%3D18.0.0-brightgreen?logo=node.js)](https://nodejs.org)
+[![Claude Code](https://img.shields.io/badge/Claude_Code-Skill-orange?logo=anthropic)](https://claude.com/claude-code)
+
+```bash
+npm install -g agency-toolkit
+```
 
 </div>
 
