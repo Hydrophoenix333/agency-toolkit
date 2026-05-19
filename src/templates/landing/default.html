@@ -1,0 +1,45 @@
+<!--
+  TEMPLATE: Landing page (conversion-focused)
+  STATUS: basic version
+-->
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{client.name}}</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: {{brand.colors.background}};
+    --primary: {{brand.colors.primary}};
+    --accent: {{brand.colors.accent}};
+    --text: #EDF0FF;
+    --text-muted: #8B91B8;
+  }
+  body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+  .hero { min-height: 100vh; display: flex; align-items: center; padding: 60px 24px; }
+  .container { max-width: 900px; margin: 0 auto; text-align: center; }
+  h1 { font-family: 'Plus Jakarta Sans', sans-serif; font-size: clamp(40px, 7vw, 80px); font-weight: 800; letter-spacing: -0.04em; line-height: 1; margin-bottom: 24px; }
+  h1 .accent { background: linear-gradient(135deg, var(--primary), var(--accent)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .sub { font-size: 19px; color: var(--text-muted); margin-bottom: 40px; max-width: 600px; margin-left: auto; margin-right: auto; }
+  .cta {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 18px 36px; border-radius: 100px;
+    background: linear-gradient(135deg, var(--primary), var(--accent));
+    color: white; font-weight: 600; font-size: 16px; text-decoration: none;
+  }
+</style>
+</head>
+<body>
+  <section class="hero">
+    <div class="container">
+      <h1>{{client.name}}<br><span class="accent">[Tu oferta principal]</span></h1>
+      <p class="sub">[Subtítulo que comunica el valor único y el resultado para el visitante]</p>
+      <a href="https://wa.me/{{brand.contact.whatsapp}}" class="cta">Empezar ahora →</a>
+    </div>
+  </section>
+</body>
+</html>

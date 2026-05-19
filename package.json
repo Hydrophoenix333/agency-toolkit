@@ -1,0 +1,55 @@
+{
+  "name": "agency-toolkit",
+  "version": "0.1.0",
+  "description": "Generate premium agency-level HTML proposals, landings, and diagnostics with your own branding. Powered by AI and a curated vanilla web stack (Motion, GSAP, Cult UI patterns, Chart.js).",
+  "type": "module",
+  "bin": {
+    "agency-toolkit": "./bin/agency-toolkit.js",
+    "atk": "./bin/agency-toolkit.js"
+  },
+  "scripts": {
+    "start": "node bin/agency-toolkit.js",
+    "test": "node --test test/"
+  },
+  "files": [
+    "bin/",
+    "src/",
+    "SKILL.md",
+    "README.md",
+    "LICENSE"
+  ],
+  "keywords": [
+    "agency",
+    "proposals",
+    "landing-page",
+    "html-generator",
+    "design-system",
+    "marketing",
+    "claude-skill",
+    "ai-skill",
+    "motion",
+    "gsap",
+    "cult-ui",
+    "vanilla-html",
+    "branding"
+  ],
+  "author": "Victor Caballero (Orion Agency) <hola@orionagency.tech>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/orion-agency/agency-toolkit.git"
+  },
+  "bugs": {
+    "url": "https://github.com/orion-agency/agency-toolkit/issues"
+  },
+  "homepage": "https://github.com/orion-agency/agency-toolkit#readme",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "dependencies": {
+    "chalk": "^5.3.0",
+    "commander": "^12.1.0",
+    "inquirer": "^10.2.0",
+    "ora": "^8.1.0"
+  }
+}

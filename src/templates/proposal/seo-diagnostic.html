@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Propuesta — {{client.name}} × {{brand.name}}</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.1/vanilla-tilt.min.js"></script>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: {{brand.colors.background}};
+    --bg2: #0D0E24;
+    --bg3: #12142E;
+    --primary: {{brand.colors.primary}};
+    --accent: {{brand.colors.accent}};
+    --text: #EDF0FF;
+    --text-muted: #8B91B8;
+    --text-dim: #4E5375;
+    --border: rgba(255,255,255,0.08);
+    --border-strong: rgba(255,255,255,0.18);
+    --success: #00C896;
+    --warning: #FF8B3E;
+    --error: #FF3E5F;
+    --radius: 14px;
+    --radius-lg: 22px;
+    --font-display: 'Plus Jakarta Sans', system-ui, sans-serif;
+    --font-body: 'Inter', system-ui, sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+  }
+
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--font-body);
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    font-size: 15px;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image:
+      radial-gradient(ellipse at 20% 0%, rgba(32, 96, 255, 0.10) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 100%, rgba(91, 82, 232, 0.06) 0%, transparent 50%);
+    pointer-events: none; z-index: 0;
+  }
+
+  .container { max-width: 1180px; margin: 0 auto; padding: 0 32px; position: relative; z-index: 2; }
+  section { padding: 110px 0; position: relative; z-index: 2; }
+
+  /* Cover */
+  .cover { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; padding: 60px 0; }
+  .cover-eyebrow {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 8px 16px; border: 1px solid var(--border-strong);
+    background: rgba(255,255,255,0.04); backdrop-filter: blur(10px);
+    border-radius: 100px; font-family: var(--font-mono); font-size: 11px;
+    text-transform: uppercase; letter-spacing: 0.14em; color: var(--primary);
+    margin-bottom: 32px;
+  }
+  .cover h1 {
+    font-family: var(--font-display);
+    font-size: clamp(38px, 7vw, 86px);
+    font-weight: 800; line-height: 0.98;
+    letter-spacing: -0.04em; margin-bottom: 28px;
+  }
+  .cover h1 .gradient {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .cover-sub { font-size: 19px; color: var(--text-muted); max-width: 640px; margin-bottom: 56px; }
+
+  .cover-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+  .cover-stat {
+    padding: 24px; border-radius: var(--radius);
+    background: rgba(13, 14, 36, 0.5); backdrop-filter: blur(20px);
+    border: 1px solid var(--border);
+  }
+  .cover-stat-num {
+    font-family: var(--font-mono); font-weight: 600; font-size: 38px;
+    color: var(--text); letter-spacing: -0.03em; line-height: 1; margin-bottom: 10px;
+  }
+  .cover-stat-label {
+    font-size: 12px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.1em;
+  }
+
+  /* Sections */
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-family: var(--font-mono); font-size: 11px;
+    text-transform: uppercase; letter-spacing: 0.16em;
+    color: var(--primary); margin-bottom: 20px;
+  }
+  .eyebrow::before { content: ''; width: 28px; height: 1px; background: var(--primary); }
+  h2.section-title {
+    font-family: var(--font-display); font-size: clamp(30px, 4.5vw, 52px);
+    font-weight: 800; line-height: 1.05; letter-spacing: -0.03em; margin-bottom: 22px; max-width: 800px;
+  }
+  h2.section-title .accent {
+    background: linear-gradient(135deg, var(--primary), var(--accent));
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .section-desc { font-size: 17px; color: var(--text-muted); max-width: 680px; margin-bottom: 60px; }
+
+  /* Cards */
+  .pillars-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+  .pillar-card {
+    background: var(--bg2); border: 1px solid var(--border);
+    border-radius: var(--radius-lg); padding: 36px 30px;
+  }
+  .pillar-num {
+    font-family: var(--font-mono); font-size: 13px;
+    color: var(--primary); margin-bottom: 20px; letter-spacing: 0.1em;
+  }
+  .pillar-card h3 {
+    font-family: var(--font-display); font-size: 22px;
+    font-weight: 700; margin-bottom: 14px; letter-spacing: -0.02em;
+  }
+  .pillar-desc { font-size: 14px; color: var(--text-muted); line-height: 1.7; }
+
+  /* CTA */
+  .cta-final {
+    background: linear-gradient(135deg, var(--bg3), var(--bg2));
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg); padding: 80px 60px; text-align: center;
+  }
+  .cta-final h2 {
+    font-family: var(--font-display); font-size: clamp(28px, 4.5vw, 48px);
+    font-weight: 800; line-height: 1.1; letter-spacing: -0.03em; margin-bottom: 22px;
+  }
+  .btn-primary {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 16px 32px; border-radius: 100px;
+    background: linear-gradient(135deg, var(--primary), var(--accent));
+    color: white; font-weight: 600; font-size: 15px; text-decoration: none;
+    box-shadow: 0 4px 24px rgba(32, 96, 255, 0.3);
+  }
+
+  /* Animations */
+  .fade-up { opacity: 0; transform: translateY(24px); }
+
+  /* Mobile */
+  @media (max-width: 900px) {
+    .pillars-grid { grid-template-columns: 1fr; }
+    .cover-stats { grid-template-columns: 1fr; }
+    section { padding: 70px 0; }
+    .container { padding: 0 20px; }
+    .cta-final { padding: 48px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<section class="cover">
+  <div class="container">
+    <div class="cover-eyebrow">{{brand.name}} × {{client.name}}</div>
+    <h1>Propuesta para<br><span class="gradient">{{client.name}}</span></h1>
+    <p class="cover-sub">Un plan estratégico para que {{client.name}} multiplique sus resultados digitales en los próximos 90 días.</p>
+    <div class="cover-stats">
+      <div class="cover-stat">
+        <div class="cover-stat-num">[SCORE]<span style="font-size:20px;color:var(--text-dim)">/100</span></div>
+        <div class="cover-stat-label">Score actual</div>
+      </div>
+      <div class="cover-stat">
+        <div class="cover-stat-num">90<span style="font-size:20px;color:var(--text-dim)"> días</span></div>
+        <div class="cover-stat-label">Para resultados</div>
+      </div>
+      <div class="cover-stat">
+        <div class="cover-stat-num">[N]<span style="font-size:20px;color:var(--text-dim)">x</span></div>
+        <div class="cover-stat-label">Crecimiento esperado</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="eyebrow fade-up">Nuestra propuesta</div>
+    <h2 class="section-title fade-up">Tres ejes estratégicos <span class="accent">en paralelo</span></h2>
+    <p class="section-desc fade-up">Un sistema integrado, no piezas sueltas.</p>
+
+    <div class="pillars-grid">
+      <div class="pillar-card fade-up card-tilt">
+        <div class="pillar-num">EJE 01</div>
+        <h3>[Pilar 1]</h3>
+        <div class="pillar-desc">[Descripción del primer pilar estratégico]</div>
+      </div>
+      <div class="pillar-card fade-up card-tilt">
+        <div class="pillar-num">EJE 02</div>
+        <h3>[Pilar 2]</h3>
+        <div class="pillar-desc">[Descripción del segundo pilar estratégico]</div>
+      </div>
+      <div class="pillar-card fade-up card-tilt">
+        <div class="pillar-num">EJE 03</div>
+        <h3>[Pilar 3]</h3>
+        <div class="pillar-desc">[Descripción del tercer pilar estratégico]</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="cta-final fade-up">
+      <div class="eyebrow" style="justify-content:center">Siguiente paso</div>
+      <h2>¿Listos para empezar?</h2>
+      <p style="color:var(--text-muted);margin-bottom:36px;max-width:540px;margin-left:auto;margin-right:auto">{{client.name}} puede arrancar este plan en los próximos 7 días.</p>
+      <a href="https://wa.me/{{brand.contact.whatsapp}}?text=Hola%20{{brand.name}}%2C%20queremos%20avanzar%20con%20la%20propuesta" class="btn-primary">
+        Avanzar por WhatsApp
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer style="border-top:1px solid var(--border);padding:40px 0;margin-top:80px;">
+  <div class="container" style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px;">
+    <div style="font-family:var(--font-display);font-weight:800;font-size:14px;">{{brand.name}}</div>
+    <div style="font-family:var(--font-mono);font-size:11px;color:var(--text-dim);text-transform:uppercase;letter-spacing:0.12em;">Propuesta para {{client.name}}</div>
+  </div>
+</footer>
+
+<script>
+  gsap.registerPlugin(ScrollTrigger);
+  gsap.utils.toArray('.fade-up').forEach((el) => {
+    gsap.fromTo(el,
+      { opacity: 0, y: 28 },
+      { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out',
+        scrollTrigger: { trigger: el, start: 'top 88%', toggleActions: 'play none none none' } }
+    );
+  });
+
+  if (window.VanillaTilt) {
+    VanillaTilt.init(document.querySelectorAll('.card-tilt'), {
+      max: 5, speed: 800, glare: true, 'max-glare': 0.08
+    });
+  }
+</script>
+
+</body>
+</html>
